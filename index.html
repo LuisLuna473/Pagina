@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <style>
+
+        
+        h1 {
+          font-family: 'Lobster', cursive; 
+          display: block;
+          font-size: 2em;
+          margin-top: 0.67em;
+          margin-bottom: 0.67em;
+          margin-left: 0;
+          margin-right: 0;
+          font-weight: bold;
+          
+        }
+        h2 {font-family: 'Lobster', cursive; color: #111010;margin-bottom: 50px;}
+
+        /* Fondo dorado para la página */
+        body {
+            background-color: #ffa600a0; /* Naranja */
+            font-family: Arial, sans-serif;
+        }
+        .parqueo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .parqueo {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 10px;
+        }
+        
+        .disponible {
+            background: linear-gradient(to bottom right, #34eb77, #0fa52d); /* Verde gradiente */
+        }
+        
+        .no-disponible {
+            background: linear-gradient(to bottom right, #eb3434, #a50f0f); /* Rojo gradiente */
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img class="imagen-garaje" src="https://i.imgur.com/TqFhB7U.jpeg" alt="Garaje vacío"width="1600" height="auto">
+
+<h1 style="text-align:center">SmartPark</h1>
+<h2>Disponibilidad</h2>
+
+<div class="parqueo-container">
+    <div class="parqueo disponible"> Disponible</div>
+    <div class="parqueo no-disponible">No Disponible</div>
+    <div class="parqueo disponible">Disponible</div>
+    <div class="parqueo no-disponible">No Disponible</div>
+    <div class="parqueo disponible">Disponible</div>
+    <div class="parqueo no-disponible">No Disponible</div>
+    <div class="parqueo disponible">Disponible</div>
+    <div class="parqueo no-disponible">No Disponible</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="parqueosChart" width="300" height="300"></canvas>
+<script>
+    const ctx = document.getElementById('parqueosChart').getContext('2d');
+    const parqueosChart = new Chart(ctx, {
+        type: 'doughnut', // Tipo de gráfico (dona)
+        data: {
+            labels: ['Disponible', 'No Disponible'], // Etiquetas de los estados
+            datasets: [{
+                label: 'Disponibilidad de Parqueos',
+                data: [5, 3], // Ejemplo: 5 disponibles, 3 no disponibles
+                backgroundColor: [
+                    '#34eb77', // Verde para disponibles
+                    '#eb3434'  // Rojo para no disponibles
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                tooltip: {
+                    callbacks: {
+                        label: function(tooltipItem) {
+                            return tooltipItem.label + ": " + tooltipItem.raw;
+                        }
+                    }
+                }
+            }
+        }
+    });
+</script>
+<script type ="text/javascript">
+    //Carga la pagina cada 5Seg
+    setTimeout(function (){
+        location.reload();
+    }, 5000); 
+
+</script>
+</body>
+</html>
